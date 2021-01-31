@@ -1,0 +1,482 @@
+[
+    {
+        "name": "Apley’s Test",
+        "description": "Determination of meniscal tear in the knee by grinding the joint manually",
+        "disease": "Knee Joint Meniscal tear"
+    },
+    {
+        "name": "Argyll–Robertson Pupil",
+        "description": "Bilaterally small, irregular, unequal pupils that react to accommodation but not to light. Seen with tertiary syphilis",
+        "disease": "Tertiary Syphilis"
+    },
+    {
+        "name": "Austin Flint Murmur",
+        "description": "Late diastolic mitral murmur; associated with aortic insufficiency with a normal mitral valve",
+        "disease": "Aortic insufficiency"
+    },
+    {
+        "name": "Babinski’s Sign",
+        "description": "Extension of the large toe with stimulation of the plantar surface of the foot instead of the normal flexion; indicative of upper motor neuron disease (normal in neonates)",
+        "disease": "Upper motor neuron lesion"
+    },
+    {
+        "name": "Bainbridge’s Reflex",
+        "description": "Increased heart rate due to increased right atrial pressure",
+        "disease": "Increased right atrial pressure"
+    },
+    {
+        "name": "Battle’s Sign",
+        "description": "Ecchymosis behind the ear associated with basilar skull fractures.",
+        "disease": "Base of skull fracture"
+    },
+    {
+        "name": "Beau’s Lines",
+        "description": "Transverse depressions in nails due to previous systemic disease",
+        "disease": "Hypoalbuminaemia"
+    },
+    {
+        "name": "Biot’s Breathing",
+        "description": "Seen with brain injury; abruptly alternating apnea and equally deep breaths",
+        "disease": "Head injury"
+    },
+    {
+        "name": "Bergman’s Triad",
+        "description": "Altered mental status, petechiae, and dyspnea associated with fat embolus syndrome",
+        "disease": "Fat embolus syndrome"
+    },
+    {
+        "name": "Bell’s Palsy",
+        "description": "Lower motor neuron lesion of the facial nerve affecting muscles of upper and lower face. Easily distinguished from upper motor lesions, which affect predominately muscles of lower face since upper motor neurons from each side innervate muscles on both sides of the upper face",
+        "disease": "Lower motor neuron Lesion"
+    },
+    {
+        "name": "Beck’s Triad",
+        "description": "JVD, diminished or muffled heart sounds, and decreased blood pressure associated with cardiac tamponade",
+        "disease": "Cardiac tamponade"
+    },
+    {
+        "name": "Bisferious Pulse",
+        "description": "A double-peaked pulse seen in severe chronic aortic insufficiency",
+        "disease": "Aortic insufficiency"
+    },
+    {
+        "name": "Bitot’s Spots",
+        "description": "Small scleral white patches suggesting vitamin A deficiency",
+        "disease": "Vitamin A deficiency"
+    },
+    {
+        "name": "Blumberg’ Sign",
+        "description": "Pain felt in the abdomen when steady constant pressure is quickly released. Seen with peritonitis",
+        "disease": "Peritonitis"
+    },
+    {
+        "name": "Blumer’s Shelf",
+        "description": "Hardness palpable on rectal examination due to metastatic cancer of the rectouterine (pouch of Douglas) or rectovesical pouch",
+        "disease": "Metastatic cancer of Rectovesical pouch or Rectouterine pouch"
+    },
+    {
+        "name": "Bouchard’s Nodes",
+        "description": "Hard, nontender, painless nodules in the dorsolateral aspects of the proximal interphalangeal joints associated with osteoarthritis. Results from hypertrophy of the bone",
+        "disease": "Osteoarthritis"
+    },
+    {
+        "name": "Branham’s Sign",
+        "description": "With large AV fistulas, abrupt slowing of the heart rate with compression of the feeding artery",
+        "disease": "Large AV-Fistula"
+    },
+    {
+        "name": "Brudzinski’s Sign",
+        "description": "Flexion of the neck causing flexion of the hips in meningitis",
+        "disease": "Meningitis"
+    },
+    {
+        "name": "Chadwick’s Sign",
+        "description": "Bluish color of cervix and vagina, seen with pregnancy",
+        "disease": "Pregnancy"
+    },
+    {
+        "name": "Chandelier’s Sign",
+        "description": "Extreme pain elicited with movement of the cervix during bimanual pelvic examination. Indicates PID",
+        "disease": "PID"
+    },
+    {
+        "name": "Charcot’s Triad",
+        "description": "Right upper quadrant pain, fever (chills), and jaundice associated with cholangitis",
+        "disease": "Cholangitis"
+    },
+    {
+        "name": "Cheyne–Stokes Respiration",
+        "description": "Repeating cycle of a gradual increase in depth of breathing followed by a gradual decrease to apnea; seen with CNS disorders, uremia, some normal sleep patterns",
+        "disease": "Intracranial hypertension"
+    },
+    {
+        "name": "Chvostek’s Sign",
+        "description": "Tapping over the facial nerve causes facial spasm in hypocalcemia(tetany). May be normal finding in some patients",
+        "disease": "Hypocalcemia"
+    },
+    {
+        "name": "Corrigan’s Pulse",
+        "description": "A palpable hard pulse immediately followed by sudden collapse, seen in aortic regurgitation",
+        "disease": "Aortic regurgitation"
+    },
+    {
+        "name": "Cullen’s Sign",
+        "description": "Ecchymosis around the umbilicus associated with severe intraperitoneal bleeding. Seen with ruptured ectopic pregnancy and hemorrhagic pancreatitis",
+        "disease": "Ruptured ectopic pregnancy"
+    },
+    {
+        "name": "Cushing’s Triad",
+        "description": "Hypertension, bradycardia, and irregular respiration associated with increased intracranial pressure",
+        "disease": "Intracranial hypertension"
+    },
+    {
+        "name": "Darier’s Sign",
+        "description": "Stroking of the skin causes erythema and edema in mastocytosis",
+        "disease": "Mastocytosis"
+    },
+    {
+        "name": "Doll’s Eyes",
+        "description": "Conjugated movement of eyes in one direction as head is briskly turned in the other direction in comatose patients. Tests oculocephalic reflex indicating intact brain stem",
+        "disease": "Brain stem lesions"
+    },
+    {
+        "name": "Drawer Sign",
+        "description": "Forward (or backward) movement of the tibia with pressure, indicating laxity or a tear in the anterior (or posterior) cruciate ligament",
+        "disease": "Cruciate Ligament injury"
+    },
+    {
+        "name": "Dupuytren’s Contracture",
+        "description": "Proliferation of fibrosis tissue of the palmar fascia resulting in contracture of the fourth and/or fifth digits, which is often bilateral. May be hereditary or seen in patients with chronic alcoholic liver disease or seizures",
+        "disease": "Alcoholic liver disease"
+    },
+    {
+        "name": "Duroziez’s Sign",
+        "description": "Found in aortic regurgitation a“to and fro” murmur when stethoscope is pressed over the femoral artery",
+        "disease": "Aortic regurgitation"
+    },
+    {
+        "name": "Electrical Alternans",
+        "description": "Beat to beat variation in the electrical axis, seen in large pericardial effusions, suggests impending hemodynamic compromise",
+        "disease": "Pericardial effusion"
+    },
+    {
+        "name": "Ewart’s Sign",
+        "description": "Dullness to percussion, increased fremitus and bronchial breathing beneath the angle of the left scapula found with pericardial effusion",
+        "disease": "Pericardial effusion"
+    },
+    {
+        "name": "Fong Lesion/Syndrome",
+        "description": "Autosomal-dominant anomalies of the nails and patella associated with renal abnormalities",
+        "disease": "Renal abnormalities"
+    },
+    {
+        "name": "Frank’s Sign",
+        "description": "Fissure of the ear lobe; may be associated with CAD, diabetes, and hypertension",
+        "disease": "Coronary artery disease"
+    },
+    {
+        "name": "Gibbus deformity",
+        "description": "Angular convexity of the spine due to vertebral collapse; associated with osteoporosis or metastasis",
+        "disease": "Pott's disease"
+    },
+    {
+        "name": "Gregg’s Triad",
+        "description": "Cataracts, heart defects, and deafness with congenital rubella",
+        "disease": "Congenital rubella syndrome"
+    },
+    {
+        "name": "Grey Turner’s Sign",
+        "description": "Ecchymosis in the flank associated with retroperitoneal hemorrhage",
+        "disease": "Retroperitoneal hemorrhage"
+    },
+    {
+        "name": "Grocco’s Sign",
+        "description": "Triangular area of paravertebral dullness, opposite side of a pleural effusion",
+        "disease": "Pleural effusion"
+    },
+    {
+        "name": "Heberden’s Nodes",
+        "description": "Hard, nontender, painless nodules on the dorsolateral aspects of the distal interphalangeal joints associated with osteoarthritis. Results from hypertrophy of the bone",
+        "disease": "Osteoarthritis"
+    },
+    {
+        "name": "Hegar’s Sign",
+        "description": "Softening of the distal uterus. Reliable early sign of pregnancy",
+        "disease": "Pregnancy"
+    },
+    {
+        "name": "Hellenhorst’s Plaque:",
+        "description": "A cholesterol plaque on retina seen on funduscopic examination associated with amaurosis fugax",
+        "disease": "Amaurosis fugax"
+    },
+    {
+        "name": "Hill’s Sign",
+        "description": "Femoral artery pressure 20 mm Hg greater than brachial pressure seen in severe aortic regurgitation",
+        "disease": "Aortic regurgitation"
+    },
+    {
+        "name": "Hoffmann’s Sign/Reflex",
+        "description": "Flicking of the volar surface of the distal phalanx causing fingers to flex; associated with pyramidal tract disease",
+        "disease": "Pyramidal tract disease"
+    },
+    {
+        "name": "Homans’ Sign",
+        "description": "Calf pain with forcible dorsiflexion of the foot, associated with venous thrombosis",
+        "disease": "DVT"
+    },
+    {
+        "name": "Horner’s Syndrome",
+        "description": "Unilateral miosis, ptosis, and anhidrosis (absence of sweating). From destruction of ipsilateral superior cervical ganglion often from lung carcinoma, especially squamous cell carcinoma",
+        "disease": "Lung cancer"
+    },
+    {
+        "name": "Janeway’s Lesions",
+        "description": "Erythematous or hemorrhagic lesion seen on the palm or sole with subacute bacterial endocarditis",
+        "disease": "Subacute bacterial endocarditis"
+    },
+    {
+        "name": "Joffroy’s Reflex",
+        "description": "Inability to wrinkle the forehead when patient asked to bend head and look up, seen in hyperthyroidism",
+        "disease": "Hyperthyroidism"
+    },
+    {
+        "name": "Kayser–Fleischer Ring",
+        "description": "Brown pigment lesion due to copper deposition seen in Wilson’s disease",
+        "disease": "Wilson’s disease"
+    },
+    {
+        "name": "Kehr’s Sign",
+        "description": "Left shoulder and left upper quadrant pain associated with splenic rupture",
+        "disease": "Splenic rupture"
+    },
+    {
+        "name": "Kernig’s Sign",
+        "description": "When the thigh is flexed at a right angle, complete extension of the leg is not possible because of inflammation of the meninges; seen with meningitis",
+        "disease": "Meningitis"
+    },
+    {
+        "name": "Koplik’s Spots",
+        "description": "White papules on buccal mucosa opposite molars seen in measles",
+        "disease": "Measles"
+    },
+    {
+        "name": "Korotkoff’s Sounds",
+        "description": "Low-pitched sounds resulting from vibration of the artery, detected when obtaining a blood pressure using the bell of the stethoscope. The last Korotkoff sound may be a more accurate estimate of the true diastolic blood pressure than the diastolic blood pressure obtained using the diaphragm.",
+        "disease": "Blood pressure"
+    },
+    {
+        "name": "Kussmaul’s Respiration",
+        "description": "Deep, rapid respiratory pattern seen in coma or DKA",
+        "disease": "Diabetic ketoacidosis(DKA)"
+    },
+    {
+        "name": "Kussmaul’s Sign",
+        "description": "Paradoxical rise in the jugular venous pressure on inspiration in constrictive pericarditis or COPD",
+        "disease": "Constrictive pericarditis"
+    },
+    {
+        "name": "Kyphosis",
+        "description": "Excessive rounding of the thoracic spinal convexity, associated with aging, especially in women",
+        "disease": "Aging"
+    },
+    {
+        "name": "Straight-Leg-Raising Sign",
+        "description": "The patient is extended in the supine position and raises the leg gently. Pain in the distribution of nerve root suggests sciatica.",
+        "disease": "Sciatica"
+    },
+    {
+        "name": "Levine’s Sign",
+        "description": "Clenched fist over the chest while describing chest pain; associated with angina and AMI",
+        "disease": "Acute myocardial infarction"
+    },
+    {
+        "name": "Lhermitte’s Sign",
+        "description": "In MS, neck flexion results in a shock sensation",
+        "disease": "Multiple Sclerosis"
+    },
+    {
+        "name": "List",
+        "description": "Lateral tilt of the spine, frequently associated with herniated disk and muscle spasm",
+        "disease": "Herniated Vertebral disc"
+    },
+    {
+        "name": "Lordosis",
+        "description": "Accentuated normal concavity of the lumbar spine, normal in pregnancy",
+        "disease": "Pregnancy"
+    },
+    {
+        "name": "Louvel’s Sign",
+        "description": "Coughing or sneezing causes pain in the leg with DVT",
+        "disease": "DVT"
+    },
+    {
+        "name": "Marcus–Gunn Pupil",
+        "description": "Dilation of pupils with swinging flashlight test. Results from unilateral optic nerve disease. Normal pupillary response is elicited when light is directed from the normal eye and a subnormal response when light is quickly directed from the normal eye into the abnormal eye. When light is directed into the abnormal eye, both pupils dilate rather than maintain the previous degree of miosis.",
+        "disease": "Unilateral optic nerve disease"
+    },
+    {
+        "name": "McBurney’s Point/Sign",
+        "description": "Point located one-third of the distance from the anterior superior iliac spine to the umbilicus on the right; tenderness at the site is associated with acute appendicitis.",
+        "disease": "Acute appendicitis"
+    },
+    {
+        "name": "McMurray’s Test",
+        "description": "External rotation of the foot produces a palpable or audible click on the joint line, suggesting medial meniscal injuries",
+        "disease": "Medial meniscal injuries"
+    },
+    {
+        "name": "Möbius’ Sign",
+        "description": "Weakness of convergence seen in thyrotoxicosis",
+        "disease": "Tyrotoxicosis"
+    },
+    {
+        "name": "Moro’s Reflex (Startle Reflex)",
+        "description": "Abduction of hips and arms with extension of arms when infant’s head and upper body is suddenly dropped several inches while being held. Normal reflex in early infancy",
+        "disease": ""
+    },
+    {
+        "name": "Murphy’s Sign",
+        "description": "Severe pain and inspiratory arrest with palpation of the right upper quadrant during deep inspiration; associated with cholecystitis",
+        "disease": "Acute Cholecystitis"
+    },
+    {
+        "name": "Musset’s(de Musset’s Sign)",
+        "description": "Abduction of hips and arms with extension of arms when infant’s head and upper body is suddenly dropped several inches while being held. Normal reflex in early infancy",
+        "disease": ""
+    },
+    {
+        "name": "Obturator Sign",
+        "description": "Flexion and internal rotation of the thigh elicits hypogastric pain in cases of inflammation of the obturator internus; positive with pelvic abscess and appendicitis",
+        "disease": "Acute appendicitis"
+    },
+    {
+        "name": "Ortolani’s Test/Sign",
+        "description": "Hip click that suggests congenital hip dislocation. With the infant supine, point the legs toward you and flex the legs to 90 degrees at the hips and knees",
+        "disease": "Congenital hip dislocation"
+    },
+    {
+        "name": "Pancoast’s Syndrome",
+        "description": "Carcinoma involving apex of lung, resulting in arm and or shoulder pain from involvement of brachial plexus and Horner’s syndrome from involvement of the superior cervical ganglion",
+        "disease": "Lung cancer"
+    },
+    {
+        "name": "Pastia’s Lines",
+        "description": "Linear striations of confluent petechiae in axillary folds are antecubital fossa seen in scarlet fever",
+        "disease": "Scarlet fever"
+    },
+    {
+        "name": "Phalen’s Test",
+        "description": "Prolonged maximum flexion of wrists while opposing dorsum of each hand against each other. A positive test results in pain and tingling in the distribution of the median nerve, indicating carpal tunnel syndrome",
+        "disease": "Carpal tunnel syndrome"
+    },
+    {
+        "name": "Psoas Sign",
+        "description": "Flexion against resistance or extension of the right hip, producing pain; seen with inflammation of the psoas muscle; positive with appendicitis.",
+        "disease": "Acute appendicitis"
+    },
+    {
+        "name": "Pulsus Alternans",
+        "description": "Fluctuation of pulse pressure with every other beat. Seen in aortic stenosis and CHF",
+        "disease": "CCF"
+    },
+    {
+        "name": "Queckenstedt’s Test",
+        "description": "Tests patency of the subarachnoid space; compression of the internal jugular vein during lumbar puncture; should normally immediately raise CSF pressure",
+        "disease": ""
+    },
+    {
+        "name": "Quincke’s Sign",
+        "description": "Alternating blushing and blanching of the fingernail bed following light compression; seen in chronic aortic regurgitation",
+        "disease": "Aortic regurgitation"
+    },
+    {
+        "name": "Radovici’s Sign",
+        "description": "A frontal release sign, scratching palm causes chin contractions",
+        "disease": "Frontal release"
+    },
+    {
+        "name": "Raynaud’s phenomenon",
+        "description": "Pain and tingling in fingers after exposure to cold with characteristic color changes of white to blue and then often red. May be seen with scleroderma, and SLE",
+        "disease": "Scleroderma"
+    },
+    {
+        "name": "Romberg’s Test",
+        "description": "Used to test position sense or cerebellar function. The patient stands with heels and toes together. Arms may be outstretched with palms facing upward or down or arms can be at the patient’s side. The patient may be lightly tapped by the examiner with the eyes open and then closed. A positive test is a loss of balance. A loss of balance with the eyes open indicates cerebellar dysfunction. Normal balance with eyes open and loss of balance with eyes closed indicates loss of position sense.",
+        "disease": "Cerebellar dysfunction"
+    },
+    {
+        "name": "Roth’s Spots",
+        "description": "Oval retinal hemorrhages with a pale central area occurring in patients with bacterial endocarditis",
+        "disease": "Subacute bacterial endocarditis"
+    },
+    {
+        "name": "Rovsing’s Sign",
+        "description": "Pain in the right lower quadrant with deep palpation of the left lower quadrant. Seen in acute appendicitis",
+        "disease": "Acute appendicitis"
+    },
+    {
+        "name": "Schmorl’s Node",
+        "description": "Degeneration of the intervertebral disk resulting in herniation into the adjacent vertebral body",
+        "disease": "Intervertebral disc degeneration"
+    },
+    {
+        "name": "Scoliosis",
+        "description": "Lateral curvature of the spine",
+        "disease": ""
+    },
+    {
+        "name": "Sentinel Loop",
+        "description": "A single dilated loop of small or large bowel, usually occurs localized inflammation such as pancreatitis",
+        "disease": "Acute Pancreatitis"
+    },
+    {
+        "name": "Sister Mary Joseph’s Nodule",
+        "description": "Metastatic cancer to umbilical lymph node",
+        "disease": "Intra-abdominal malignancy"
+    },
+    {
+        "name": "Stellwag’s Sign",
+        "description": "Stellwag's sign is a sign of infrequent or incomplete blinking associated with exophthalmos or Graves orbitopathy. It is accompanied by Dalrymple's sign, which is a retraction of the upper eyelids resulting in an apparent widening of the palpebral opening",
+        "disease": "Grave's Disease"
+    },
+    {
+        "name": "Tinel’s Sign",
+        "description": "Radiation of an electric shock sensation in the distal distribution of the median nerve elicited by percussion of the flexor surface of the wrist when fully extended. Seen in carpal tunnel syndrome",
+        "disease": "Carpal tunnel syndrome"
+    },
+    {
+        "name": "Traube’s Sign",
+        "description": "Booming or pistol shot sounds heard over the femoral arteries in chronic aortic insufficiency",
+        "disease": "Aortic insufficiency"
+    },
+    {
+        "name": "Trendelenburg’s Test",
+        "description": "Observe patient from behind while patient shifts weight from one leg to the other; a pelvis tilt to opposite side suggests hip disease and weakness of the gluteus medius muscle. If normal, pelvis will not tilt",
+        "disease": "Hip dislocation"
+    },
+    {
+        "name": "Trousseau’s Sign",
+        "description": "Carpal spasm produced by inflating a blood pressure cuff above the systolic pressure for 2–3 min, indicates hypocalcemia; also migratory thrombophlebitis associated with cancer",
+        "disease": "Hypocalcemia"
+    },
+    {
+        "name": "Virchow’s Node",
+        "description": "A palpable, left supraclavicular lymph node; often first sign of a GI neoplasm, such as pancreatic or gastric carcinoma",
+        "disease": "Gastric carcinoma"
+    },
+    {
+        "name": "von Graefe’s Sign",
+        "description": "Lid lag associated with thyrotoxicosis",
+        "disease": "Thyrotoxicosis"
+    },
+    {
+        "name": "Weber–Rinne Test",
+        "description": "For the Weber test a 512 or 1024-Hz tuning fork is placed on the middle of the skull to determine if the sound lateralizes. For the Rinne test, the tuning fork is held against the mastoid process (BC) with the opposite ear covered. The patient  ndicates when the sound is gone. The tuning  ork is then held next to the ear and the patient indicates whether the sound is present and when the sound (AC) disappears. Normally AC is better than BC. With sensorineural hearing loss, the Weber test lateralizes to the less affected ear and AC > BC; with conduction hearing loss, the Weber test lateralizes to the more affected ear and BC > AC",
+        "disease": ""
+    },
+    {
+        "name": "Whipple’s Triad",
+        "description": "Hypoglycemia, CNS, and vasomotor symptoms (ie, diaphoresis, syncope); relief of symptoms with glucose; associated with insulinoma",
+        "disease": "Insulinoma"
+    }
+]
