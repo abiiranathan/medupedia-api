@@ -1,24 +1,36 @@
-from rest_framework.viewsets import ModelViewSet
-from .models import Disease, Sign, Symptom
-
-from .serializers import DiseaseSerializer, SignSerializer, SymptomSerializer, UserSerializer
 from django.contrib.auth.models import User
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+# from django.views.decorators.vary import vary_on_cookie
+# from django.views.decorators.cache import cache_control
+
+from rest_framework.viewsets import ModelViewSet
+
+from .models import Disease, Sign, Symptom
+from .serializers import (DiseaseSerializer, SignSerializer, SymptomSerializer,
+                          UserSerializer)
 
 
-class DiseaseViewSet(ModelViewSet):
+class CacheMixin(object):
+    @method_decorator(cache_page(60*10))
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+
+class DiseaseViewSet(CacheMixin, ModelViewSet):
     serializer_class = DiseaseSerializer
     queryset = Disease.objects.all()
     search_fields = ['name', 'about']
 
 
-class SymptomViewSet(ModelViewSet):
+class SymptomViewSet(CacheMixin, ModelViewSet):
     serializer_class = SymptomSerializer
     queryset = Symptom.objects.all()
 
     search_fields = ['name', 'description']
 
 
-class SignViewSet(ModelViewSet):
+class SignViewSet(CacheMixin, ModelViewSet):
     serializer_class = SignSerializer
     queryset = Sign.objects.all()
 
