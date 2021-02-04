@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 # from django.views.decorators.vary import vary_on_cookie
-# from django.views.decorators.cache import cache_control
+from django.views.decorators.cache import cache_control
 
 from rest_framework.viewsets import ModelViewSet
 
@@ -12,6 +12,7 @@ from .serializers import (DiseaseSerializer, SignSerializer, SymptomSerializer,
 
 
 class CacheMixin(object):
+    @cache_control(max_age=3600)
     @method_decorator(cache_page(60*10))
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)

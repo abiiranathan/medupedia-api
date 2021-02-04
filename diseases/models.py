@@ -24,12 +24,12 @@ class Sign(Feature):
 
 class Disease(models.Model):
     name = models.CharField(max_length=200, unique=True)
-    symptoms = models.ManyToManyField(Symptom)
-    signs = models.ManyToManyField(Sign)
+    symptoms = models.ManyToManyField(Symptom, blank=True)
+    signs = models.ManyToManyField(Sign, blank=True)
     about = models.TextField(default="", blank=True)
 
     def __str__(self) -> str:
         return self.name
 
     class Meta:
-        ordering = ('name', )
+        ordering = ('name', 'id')
