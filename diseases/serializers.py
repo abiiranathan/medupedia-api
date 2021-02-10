@@ -40,11 +40,11 @@ class DiseaseSerializer(DynamicFieldsMixin, HyperlinkedModelSerializer):
         disease = Disease.objects.create(**validated_data)
 
         for symp in symptoms:
-            symptom = Symptom.objects.create(**symp)
+            symptom, _ = Symptom.objects.get_or_create(**symp)
             disease.symptoms.add(symptom)
 
         for sn in signs:
-            sign = Sign.objects.create(**sn)
+            sign, _ = Sign.objects.get_or_create(**sn)
             disease.signs.add(sign)
 
         return disease

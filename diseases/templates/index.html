@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="High-Yield eponymous medical signs, symptoms and differential diagnoses"
+    />
+    <link rel="shortcut icon" href="{% static 'img/icon.png' %}" type="image/png" />
+    <title>Medupedia</title>
+    <link rel="stylesheet" href="{% static 'css/tabs.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <script src="{% static 'js/main.js' %}" defer></script>
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <div class="header">
+          <section>
+            <img
+              src="{% static 'img/icon.png' %}"
+              alt="Medupedia Icon"
+              width="50"
+              height="50"
+              id="logo"
+            />
+          </section>
+          <section>
+            <h1 id="title">Medupedia</h1>
+            <p id="subtitle">Eponymous medical signs, symptoms and differential diagnoses</p>
+          </section>
+        </div>
+        {% include 'tabs.html' %}
+        <div class="disease-detail"></div>
+      </div>
+    </main>
+  </body>
+</html>

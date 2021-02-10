@@ -1,0 +1,29 @@
+<div class="feature signs">
+  <div class="card">
+    <h4>All Signs</h4>
+    <input
+      type="search"
+      name="filter_signs"
+      class="form-input"
+      placeholder="Type to filter"
+      id="filter_signs"
+      autocomplete="off"
+    />
+    <select id="available_signs" class="select-list sign-list" multiple></select>
+    <small class="helper">Press <strong>Ctrl + Click</strong> to select multiple signs</small>
+  </div>
+
+  <div class="arrows">
+    <button class="arrow right sign" title="Add selected medical signs" type="button">
+      <span>&#8594;</span>
+    </button>
+    <button class="arrow left sign" title="Remove selected medical signs" type="button">
+      <span>&#8592;</span>
+    </button>
+  </div>
+
+  <div class="card">
+    <h4>Eponymous Signs</h4>
+    <select id="chosen_signs" class="select-list sign-list" multiple></select>
+  </div>
+</div>
