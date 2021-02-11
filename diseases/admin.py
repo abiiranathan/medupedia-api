@@ -10,6 +10,7 @@ class DiseaseAdmin(admin.ModelAdmin):
     model = Disease
     list_display = ['name']
     filter_horizontal = ['symptoms', 'signs']
+    search_fields = ["name"]
 
 
 @admin.register(Symptom)

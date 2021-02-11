@@ -2,52 +2,31 @@ from django.contrib.auth.models import User
 from django_restql.fields import DynamicSerializerMethodField
 from django_restql.mixins import DynamicFieldsMixin
 from rest_framework.authtoken.models import Token
-from rest_framework.serializers import (HyperlinkedIdentityField,
-                                        HyperlinkedModelSerializer)
+from rest_framework.serializers import (
+    HyperlinkedIdentityField, ModelSerializer)
 
 from .models import Disease, Sign, Symptom
 
 
-class SymptomSerializer(DynamicFieldsMixin, HyperlinkedModelSerializer):
-    url = HyperlinkedIdentityField(view_name="diseases:symptoms-detail")
-
+class SymptomSerializer(DynamicFieldsMixin, ModelSerializer):
     class Meta:
-        fields = ('id', 'url', 'name', 'description')
+        fields = ('id',  'name', 'description')
         model = Symptom
 
 
-class SignSerializer(DynamicFieldsMixin, HyperlinkedModelSerializer):
-    url = HyperlinkedIdentityField(view_name="diseases:signs-detail")
-
+class SignSerializer(DynamicFieldsMixin, ModelSerializer):
     class Meta:
-        fields = ('id', 'url', 'name', 'description')
+        fields = ('id',  'name', 'description')
         model = Sign
 
 
-class DiseaseSerializer(DynamicFieldsMixin, HyperlinkedModelSerializer):
-    symptoms = SymptomSerializer(many=True)
-    signs = SignSerializer(many=True)
-    url = HyperlinkedIdentityField(view_name="diseases:diseases-detail")
+class DiseaseSerializer(DynamicFieldsMixin, ModelSerializer):
+    symptoms = SymptomSerializer(many=True, read_only=True)
+    signs = SignSerializer(many=True, read_only=True)
 
     class Meta:
-        fields = ('id', 'url', 'name', 'symptoms', 'signs', 'about')
+        fields = ('id', 'name', 'symptoms', 'signs', 'about')
         model = Disease
-
-    def create(self, validated_data):
-        symptoms = validated_data.pop('symptoms', [])
-        signs = validated_data.pop("signs", [])
-
-        disease = Disease.objects.create(**validated_data)
-
-        for symp in symptoms:
-            symptom, _ = Symptom.objects.get_or_create(**symp)
-            disease.symptoms.add(symptom)
-
-        for sn in signs:
-            sign, _ = Sign.objects.get_or_create(**sn)
-            disease.signs.add(sign)
-
-        return disease
 
     def get_symptoms(self, obj, query):
         symptoms = obj.symptoms.all()
@@ -72,7 +51,7 @@ class DiseaseSerializer(DynamicFieldsMixin, HyperlinkedModelSerializer):
         return serializer.data
 
 
-class UserSerializer(HyperlinkedModelSerializer):
+class UserSerializer(ModelSerializer):
     token = DynamicSerializerMethodField()
 
     class Meta:

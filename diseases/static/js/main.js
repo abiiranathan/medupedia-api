@@ -35,14 +35,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-// ts-check
-var TABS_OPEN = "tabs-open";
-var DISEASE = "disease";
-var States = {
-    OPEN: "yes",
-    NOT_OPEN: "no"
-};
+// Javascript for Medupedia -> Could have been easier with a framework(like React)
+// but why not use typescript and keep the dependency graph to zero(other than TS)
+// Feel free to submit Pull Requests and Issues
+// Use this code in any project you desire.
+// Sample project is hosted at: https://medupedia.pythonanywhere.com
+// Dr. Abiira Nathan via @abiiranathan
 var tabs = document.querySelectorAll(".tablinks");
+var tabWidget = document.querySelector(".tabWidget");
+// symptoms
 var available_symptoms = document.getElementById("available_symptoms");
 var chosen_symptoms = document.getElementById("chosen_symptoms");
 var filter_symptoms = document.getElementById("filter_symptoms");
@@ -58,57 +59,18 @@ var rmvSignBtn = document.querySelector("button.arrow.left.sign");
 var searchInput = document.querySelector(".search-diseases");
 var diseaseList = document.querySelector("#disease_list");
 var addDiseaseForm = document.querySelector("#add-disease-form");
-function fetchData(url) {
-    return __awaiter(this, void 0, void 0, function () {
-        var response, data;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, fetch(url)];
-                case 1:
-                    response = _a.sent();
-                    if (!(response.status == 200)) return [3 /*break*/, 3];
-                    return [4 /*yield*/, response.json()];
-                case 2:
-                    data = _a.sent();
-                    return [2 /*return*/, data];
-                case 3: throw new Error(response.statusText);
-            }
-        });
-    });
-}
-var fetchSymptoms = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var url;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                url = "/api/symptoms/?query={id, name}";
-                return [4 /*yield*/, fetchData(url)];
-            case 1: return [2 /*return*/, _a.sent()];
-        }
-    });
-}); };
-var fetchSigns = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var url;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                url = "/api/signs/?query={id, name}";
-                return [4 /*yield*/, fetchData(url)];
-            case 1: return [2 /*return*/, _a.sent()];
-        }
-    });
-}); };
-var fetchDiseases = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var url;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                url = "/api/diseases/?query={id, name, signs, symptoms, about}";
-                return [4 /*yield*/, fetchData(url)];
-            case 1: return [2 /*return*/, _a.sent()];
-        }
-    });
-}); };
+var editForm = document.getElementById("edit-disease-form");
+var TABS_OPEN = "tabs-open";
+var DISEASE = "disease";
+// Could have used enum here
+var STATES = {
+    OPEN: "yes",
+    NOT_OPEN: "no"
+};
+// Store signs and symptoms as global variables
+var signs, symptoms, diseases;
+// The feature encapsulates the logic for a django-admin-style multi-select dropdowns
+// Easy to add and remove signs or symptoms when registering a new disease.
 var Feature = /** @class */ (function () {
     function Feature(available, chosen, filter, addBtn, removeBtn, initialData) {
         var _this = this;
@@ -183,6 +145,57 @@ var Feature = /** @class */ (function () {
     }
     return Feature;
 }());
+function fetchData(url) {
+    return __awaiter(this, void 0, void 0, function () {
+        var response, data;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, fetch(url)];
+                case 1:
+                    response = _a.sent();
+                    if (!(response.status == 200)) return [3 /*break*/, 3];
+                    return [4 /*yield*/, response.json()];
+                case 2:
+                    data = _a.sent();
+                    return [2 /*return*/, data];
+                case 3: throw new Error(response.statusText);
+            }
+        });
+    });
+}
+var fetchSymptoms = function () { return __awaiter(void 0, void 0, void 0, function () {
+    var url;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                url = "/api/symptoms/?query={id, name, description}";
+                return [4 /*yield*/, fetchData(url)];
+            case 1: return [2 /*return*/, _a.sent()];
+        }
+    });
+}); };
+var fetchSigns = function () { return __awaiter(void 0, void 0, void 0, function () {
+    var url;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                url = "/api/signs/?query={id, name, description}";
+                return [4 /*yield*/, fetchData(url)];
+            case 1: return [2 /*return*/, _a.sent()];
+        }
+    });
+}); };
+var fetchDiseases = function () { return __awaiter(void 0, void 0, void 0, function () {
+    var url;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                url = "/api/diseases/?query={id, name, signs, symptoms, about}";
+                return [4 /*yield*/, fetchData(url)];
+            case 1: return [2 /*return*/, _a.sent()];
+        }
+    });
+}); };
 var setUpSymptoms = function (symptoms) {
     new Feature(available_symptoms, chosen_symptoms, filter_symptoms, addSymptomBtn, rmvSymptomBtn, symptoms).start();
 };
@@ -238,9 +251,103 @@ function hideSpinner() {
     var parag = document.querySelector(".loading");
     parag.style.display = "none";
 }
+// Handle saving new-disease
+addDiseaseForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (!symptoms || !signs || !diseases)
+        return;
+    var name = addDiseaseForm.querySelector("#name").value;
+    var about = addDiseaseForm.querySelector("#about").value;
+    var selectedSymptoms = symptoms.filter(function (s) {
+        return Array.from(chosen_symptoms.options)
+            .map(function (option) { return option.value; })
+            .includes(s.name);
+    });
+    var selectedSigns = signs.filter(function (s) {
+        return Array.from(chosen_signs.options)
+            .map(function (option) { return option.value; })
+            .includes(s.name);
+    });
+    var data = {
+        name: name,
+        symptoms: selectedSymptoms,
+        signs: selectedSigns,
+        about: about
+    };
+    handleSaveNewDisease(data)
+        .then(function (savedDisease) {
+        populateDiseases([savedDisease], false);
+        hideDiseaseDetail();
+        alert(savedDisease.name + " registered successfully!");
+    })["catch"](function (err) {
+        showNameExists(err);
+    });
+});
+// Disease name validation(onChange)
+// onChange sometimes does not fire(Happy with input event for now)
+addDiseaseForm.querySelector("#name").addEventListener("input", function (e) {
+    var input = e.target;
+    var name = input.value.trim();
+    var msg = name + " is already registered";
+    if (diseases.map(function (d) { return d.name; }).includes(name)) {
+        input.style.borderColor = "tomato";
+        showNameExists(msg);
+    }
+    else {
+        input.style.borderColor = "lightblue";
+        hideNameExists();
+    }
+});
+editForm.addEventListener("submit", function (e) { return __awaiter(void 0, void 0, void 0, function () {
+    var form, chosen_symptoms, chosen_signs, id, about, selectedSymptoms, selectedSigns, data, disease_1, error_1;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                e.preventDefault();
+                form = e.currentTarget;
+                chosen_symptoms = form.querySelector("#chosen_symptoms");
+                chosen_signs = form.querySelector("#chosen_signs");
+                id = form.getAttribute("data-id");
+                if (!id) return [3 /*break*/, 4];
+                about = form.querySelector("#about").value;
+                selectedSymptoms = symptoms.filter(function (s) {
+                    return Array.from(chosen_symptoms.options)
+                        .map(function (option) { return option.value; })
+                        .includes(s.name);
+                });
+                selectedSigns = signs.filter(function (s) {
+                    return Array.from(chosen_signs.options)
+                        .map(function (option) { return option.value; })
+                        .includes(s.name);
+                });
+                data = {
+                    symptoms: selectedSymptoms,
+                    signs: selectedSigns,
+                    about: about
+                };
+                _a.label = 1;
+            case 1:
+                _a.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, handleUpdateDisease(id, data)];
+            case 2:
+                disease_1 = _a.sent();
+                diseases = diseases.map(function (d) { return (d.id === disease_1.id ? disease_1 : d); });
+                populateDiseases(diseases, true);
+                hideDiseaseDetail();
+                editForm.style.display = "none";
+                alert(disease_1.name + " updated successfully!");
+                return [3 /*break*/, 4];
+            case 3:
+                error_1 = _a.sent();
+                console.log(error_1);
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
+        }
+    });
+}); });
 function initializePage() {
     return __awaiter(this, void 0, void 0, function () {
-        var _loop_2, i, _a, diseases_2, symptoms_1, signs_1, error_1, activeDisease;
+        var _loop_2, i, _a, diseasesList, symptomsList, signsList, error_2, activeDisease, match;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
@@ -257,7 +364,6 @@ function initializePage() {
                     _b.label = 1;
                 case 1:
                     _b.trys.push([1, 3, 4, 5]);
-                    // Fetch and display data
                     showSpinner();
                     return [4 /*yield*/, Promise.all([
                             fetchDiseases(),
@@ -265,56 +371,17 @@ function initializePage() {
                             fetchSigns(),
                         ])];
                 case 2:
-                    _a = _b.sent(), diseases_2 = _a[0], symptoms_1 = _a[1], signs_1 = _a[2];
+                    _a = _b.sent(), diseasesList = _a[0], symptomsList = _a[1], signsList = _a[2];
                     hideErrorMessage();
-                    setUpSymptoms(symptoms_1);
-                    setUpSigns(signs_1);
-                    setUpDiseases(diseases_2);
-                    // Handle saving new-diseases
-                    addDiseaseForm.addEventListener("submit", function (e) {
-                        e.preventDefault();
-                        var name = addDiseaseForm.querySelector("#name").value;
-                        var about = addDiseaseForm.querySelector("#about").value;
-                        var selectedSymptoms = symptoms_1.filter(function (s) {
-                            return Array.from(chosen_symptoms.options)
-                                .map(function (option) { return option.value; })
-                                .includes(s.name);
-                        });
-                        var selectedSigns = signs_1.filter(function (s) {
-                            return Array.from(chosen_signs.options)
-                                .map(function (option) { return option.value; })
-                                .includes(s.name);
-                        });
-                        var data = {
-                            name: name,
-                            symptoms: selectedSymptoms,
-                            signs: selectedSigns,
-                            about: about
-                        };
-                        handleSaveNewDisease(data)
-                            .then(function (savedDisease) {
-                            populateDiseases([savedDisease], false);
-                        })["catch"](function (err) {
-                            showNameExists(err);
-                        });
-                    });
-                    // Disease name validation
-                    addDiseaseForm.querySelector("#name").addEventListener("input", function (e) {
-                        var input = e.target;
-                        var name = input.value.trim();
-                        var msg = name + " is already registered";
-                        if (diseases_2.map(function (d) { return d.name; }).includes(name)) {
-                            input.style.borderColor = "tomato";
-                            showNameExists(msg);
-                        }
-                        else {
-                            input.style.borderColor = "lightblue";
-                            hideNameExists();
-                        }
-                    });
+                    symptoms = symptomsList;
+                    signs = signsList;
+                    diseases = diseasesList;
+                    setUpSymptoms(symptoms);
+                    setUpSigns(signs);
+                    setUpDiseases(diseases);
                     return [3 /*break*/, 5];
                 case 3:
-                    error_1 = _b.sent();
+                    error_2 = _b.sent();
                     showErrorMessage();
                     return [3 /*break*/, 5];
                 case 4:
@@ -322,8 +389,15 @@ function initializePage() {
                     return [7 /*endfinally*/];
                 case 5:
                     activeDisease = JSON.parse(localStorage.getItem(DISEASE));
-                    if (activeDisease != null && localStorage.getItem(TABS_OPEN) === States.NOT_OPEN) {
-                        showDiseaseDetail(activeDisease);
+                    if (activeDisease != null && localStorage.getItem(TABS_OPEN) === STATES.NOT_OPEN) {
+                        match = diseases.find(function (d) { return d.id === (activeDisease === null || activeDisease === void 0 ? void 0 : activeDisease.id); });
+                        if (match) {
+                            showDiseaseDetail(match);
+                        }
+                        else {
+                            localStorage.removeItem(DISEASE);
+                            hideDiseaseDetail();
+                        }
                     }
                     else {
                         hideDiseaseDetail();
@@ -332,6 +406,65 @@ function initializePage() {
             }
         });
     });
+}
+function editDisease() {
+    // Edit the currently selected disease
+    // Get it from local storage
+    var storedDisease = JSON.parse(localStorage.getItem(DISEASE));
+    var activeDisease = diseases.find(function (d) { return d.id === (storedDisease === null || storedDisease === void 0 ? void 0 : storedDisease.id); });
+    if (activeDisease) {
+        hideDiseaseDetail();
+        tabWidget.style.display = "none";
+        editForm.style.display = "block";
+        // Set the name
+        editForm.querySelector(".disease-name").innerHTML = activeDisease.name;
+        editForm.querySelector("#about").innerHTML = activeDisease.about;
+        editForm.setAttribute("data-id", activeDisease.id.toString());
+        var cancelBtn = editForm.querySelector("#cancel-disease-edit");
+        // symptoms
+        var available_symptoms_1 = editForm.querySelector("#available_symptoms");
+        var chosen_symptoms_1 = editForm.querySelector("#chosen_symptoms");
+        var filter_symptoms_1 = editForm.querySelector("#filter_symptoms");
+        var addSymptomBtn_1 = editForm.querySelector("button.arrow.right");
+        var rmvSymptomBtn_1 = editForm.querySelector("button.arrow.left");
+        // Signs
+        var available_signs_1 = editForm.querySelector("#available_signs");
+        var chosen_signs_1 = editForm.querySelector("#chosen_signs");
+        var filter_signs_1 = editForm.querySelector("#filter_signs");
+        var addSignBtn_1 = editForm.querySelector("button.arrow.right.sign");
+        var rmvSignBtn_1 = editForm.querySelector("button.arrow.left.sign");
+        var setUpNewDiseaseSymptoms = function (symptoms) {
+            new Feature(available_symptoms_1, chosen_symptoms_1, filter_symptoms_1, addSymptomBtn_1, rmvSymptomBtn_1, symptoms).start();
+        };
+        var setUpNewDiseaseSigns = function (signs) {
+            new Feature(available_signs_1, chosen_signs_1, filter_signs_1, addSignBtn_1, rmvSignBtn_1, signs).start();
+        };
+        var selectItems = function (selectElem, data, callback) {
+            // Set current signs and symptoms
+            // First select symptoms programmatically
+            for (var i = 0; i < selectElem.options.length; i++) {
+                var option = selectElem.options[i];
+                if (data.map(function (item) { return item.name; }).includes(option.value)) {
+                    option.setAttribute("selected", "selected");
+                }
+                else {
+                    option.removeAttribute("selected");
+                }
+            }
+            callback();
+        };
+        setUpNewDiseaseSymptoms(symptoms);
+        setUpNewDiseaseSigns(signs);
+        selectItems(available_symptoms_1, activeDisease.symptoms, function () {
+            addSymptomBtn_1.click();
+        });
+        selectItems(available_signs_1, activeDisease.signs, function () {
+            addSignBtn_1.click();
+        });
+        cancelBtn.onclick = function () {
+            showDiseaseDetail(activeDisease);
+        };
+    }
 }
 function openTab(evt, tabName) {
     // Declare all variables
@@ -350,28 +483,13 @@ function openTab(evt, tabName) {
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " active";
 }
-function showDiseaseDetail(disease) {
-    var _a;
-    var tabWidget = document.querySelector(".tabWidget");
-    tabWidget.style.display = "none";
-    var diseaseDetail = document.querySelector(".disease-detail");
-    diseaseDetail.innerHTML = "";
-    // Show card for disease
-    var diseaseStr = "\n  <div>\n    <h2 id=\"disease__name\">" + disease.name + "</h2>\n    <hr />\n    " + (((_a = disease === null || disease === void 0 ? void 0 : disease.about) === null || _a === void 0 ? void 0 : _a.length) > 0 ? "<h4 class=\"section\">Description</h4>" : "") + "\n    <p id=\"disease__about\">" + disease.about + "</p>\n    " + (disease.symptoms.length > 0 ? "<h4 class=\"section\">Symptoms</h4>" : "") + "\n    <ul id=\"disease__symptoms\">\n    " + disease.symptoms
-        .map(function (symptom) { return "<li>" + symptom.name + "<br>" + symptom.description + "</li>"; })
-        .join("\n") + "\n    </ul>\n    " + (disease.signs.length > 0 ? "<h4 class=\"section\">Signs</h4>" : "") + "\n    <ul id=\"disease__symptoms\">\n    " + disease.signs.map(function (sign) { return "<li>" + sign.name + "<br>" + sign.description + "</li>"; }).join("\n") + "</ul>\n    <button id=\"backButton\" class=\"btn\" onclick=\"hideDiseaseDetail();\"><span>&#8592; Back</span></button>\n  </div>\n  ";
-    diseaseDetail.innerHTML = diseaseStr;
-    diseaseDetail.style.display = "block";
-    localStorage.setItem(TABS_OPEN, States.NOT_OPEN);
-    localStorage.setItem(DISEASE, JSON.stringify(disease));
-}
 function hideDiseaseDetail() {
     var tabWidget = document.querySelector(".tabWidget");
     tabWidget.style.display = "block";
     var diseaseDetail = document.querySelector(".disease-detail");
     diseaseDetail.innerHTML = "";
     diseaseDetail.style.display = "none";
-    localStorage.setItem(TABS_OPEN, States.OPEN);
+    localStorage.setItem(TABS_OPEN, STATES.OPEN);
     localStorage.setItem(DISEASE, JSON.stringify(null));
 }
 function handleSaveNewDisease(data) {
@@ -407,6 +525,36 @@ function handleSaveNewDisease(data) {
         });
     });
 }
+function handleUpdateDisease(id, data) {
+    return __awaiter(this, void 0, void 0, function () {
+        var config, res, disease;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    config = {
+                        method: "PATCH",
+                        body: JSON.stringify(data),
+                        headers: {
+                            "content-type": "application/json"
+                        }
+                    };
+                    return [4 /*yield*/, fetch("/api/diseases/" + id + "/", config)];
+                case 1:
+                    res = _a.sent();
+                    return [4 /*yield*/, res.json()];
+                case 2:
+                    disease = _a.sent();
+                    if (res.ok) {
+                        return [2 /*return*/, disease];
+                    }
+                    else {
+                        throw new Error(res.statusText);
+                    }
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
 function showNameExists(err) {
     var errorResponses = document.querySelectorAll(".error-response");
     for (var i = 0; i < errorResponses.length; i++) {
@@ -421,5 +569,24 @@ function hideNameExists() {
         var elem = errorResponses[i];
         elem.style.visibility = "hidden";
     }
+}
+function showDiseaseDetail(disease) {
+    var _a;
+    tabWidget.style.display = "none";
+    editForm.style.display = "none";
+    var diseaseDetail = document.querySelector(".disease-detail");
+    diseaseDetail.innerHTML = "";
+    // Show card for disease
+    var diseaseStr = "\n  <div>\n    <h2 id=\"disease__name\"><span style=\"cursor: pointer; transform:scale(2)\" onclick=\"hideDiseaseDetail()\">&#8592;</span> " + disease.name + "</h2>\n    <hr />\n    " + (((_a = disease === null || disease === void 0 ? void 0 : disease.about) === null || _a === void 0 ? void 0 : _a.length) > 0 ? "<h4 class=\"section\">Description</h4>" : "") + "\n    <p id=\"disease__about\">" + disease.about + "</p>\n    " + (disease.symptoms.length > 0 ? "<h4 class=\"section\">Symptoms</h4>" : "") + "\n    <ul id=\"disease__symptoms\">\n    " + disease.symptoms
+        .map(function (symptom) {
+        return "<li><small><b>" + symptom.name + "</b></small><br><small>" + symptom.description + "</small></li>";
+    })
+        .join("\n") + "\n    </ul>\n    " + (disease.signs.length > 0 ? "<h4 class=\"section\">Signs</h4>" : "") + "\n    <ul id=\"disease__symptoms\">\n    " + disease.signs
+        .map(function (sign) { return "<li><small><b>" + sign.name + "</b><br></small><small>" + sign.description + "</small></li>"; })
+        .join("\n") + "</ul>\n    <button id=\"backButton\" class=\"btn\" onclick=\"hideDiseaseDetail();\">Back</span></button>\n    <button id=\"editButton\" class=\"btn\" onclick=\"editDisease();\">Edit</button>\n  </div>\n  ";
+    diseaseDetail.innerHTML = diseaseStr;
+    diseaseDetail.style.display = "block";
+    localStorage.setItem(TABS_OPEN, STATES.NOT_OPEN);
+    localStorage.setItem(DISEASE, JSON.stringify(disease));
 }
 document.addEventListener("DOMContentLoaded", initializePage);
