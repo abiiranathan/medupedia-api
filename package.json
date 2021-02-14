@@ -4,7 +4,9 @@
   "description": "Open source API for diseases, signs and symptoms",
   "main": "index.js",
   "scripts": {
-    "build": "tsc && webpack"
+    "build": "tsc && webpack",
+    "tsc": "tsc --watch",
+    "dev": "webpack --watch"
   },
   "repository": {
     "type": "git",

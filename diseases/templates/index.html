@@ -12,32 +12,41 @@
     />
     <link rel="shortcut icon" href="{% static 'img/icon.png' %}" type="image/png" />
     <title>Medupedia</title>
-    <link rel="stylesheet" href="{% static 'css/tabs.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="preload" href="{% static 'css/tabs.css' %}" as="style" />
+    <link rel="preload" href="{% static 'css/modal.css' %}" as="style" />
+    <link rel="preload" href="{% static 'css/style.css' %}" as="style" />
+
+    <link href="{% static 'css/tabs.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/modal.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+
     <script src="{% static 'js/main.js' %}" defer></script>
   </head>
   <body>
-    <main>
-      <div class="container">
-        <div class="header">
-          <section>
-            <img
-              src="{% static 'img/icon.png' %}"
-              alt="Medupedia Icon"
-              width="50"
-              height="50"
-              id="logo"
-            />
-          </section>
-          <section>
-            <h1 id="title">Medupedia</h1>
-            <p id="subtitle">Eponymous medical signs, symptoms and differential diagnoses</p>
-          </section>
+    {% include "modal.html" %}
+    <div class="overlay">
+      <main id="main">
+        <div class="container">
+          <header class="header">
+            <section>
+              <img
+                src="{% static 'img/icon.png' %}"
+                alt="Medupedia Icon"
+                width="50"
+                height="50"
+                id="logo"
+              />
+            </section>
+            <section>
+              <h1 id="title">Medupedia</h1>
+              <p id="subtitle">Eponymous medical signs, symptoms and differential diagnoses</p>
+            </section>
+          </header>
+          {% include 'tabs.html' %}
+          <div class="disease-detail"></div>
+          {% include 'edit-disease-form.html' %}
         </div>
-        {% include 'tabs.html' %}
-        <div class="disease-detail"></div>
-        {% include 'edit-disease-dlg.html' %}
-      </div>
-    </main>
+      </main>
+    </div>
   </body>
 </html>

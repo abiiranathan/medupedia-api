@@ -1,22 +1,36 @@
 <div class="feature symptoms">
   <div class="card">
-    <h4>All symptoms</h4>
+    <div class="card-header">
+      <h4 class="card-title">All symptoms</h4>
+      <button class="add-symptom add-btn" title="Add new symptom" type="button">+</button>
+    </div>
     <input
       type="search"
       name="filter_symptoms"
       class="form-input"
-      placeholder="Type to filter"
+      placeholder="Type to filter symptoms"
       id="filter_symptoms"
       autocomplete="off"
     />
     <select id="available_symptoms" class="select-list symptom-list" multiple></select>
     <small class="helper">Press <strong>Ctrl + Click</strong> to select multiple symptoms</small>
   </div>
+
   <div class="arrows">
-    <button class="arrow right" title="Add selected symptoms" type="button">
+    <button
+      class="arrow right"
+      title="Add selected symptoms"
+      type="button"
+      title="Add to disease symptoms"
+    >
       <span>&#8594;</span>
     </button>
-    <button class="arrow left" title="Remove selected symptoms" type="button">
+    <button
+      class="arrow left"
+      title="Remove selected symptoms"
+      type="button"
+      title="Remove from disease symptoms"
+    >
       <span>&#8592;</span>
     </button>
   </div>

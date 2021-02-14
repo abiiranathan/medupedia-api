@@ -1,5 +1,10 @@
 <form id="edit-disease-form" method="POST" style="display: none">
+  <h2>Edit disease form</h2>
+  <hr />
   <h2 class="disease-name"></h2>
+  <small style="margin-bottom: 10px"
+    >Select one or more symptoms and signs and complete the description to Update!</small
+  >
   {% include 'symptoms.html' %} {% include 'signs.html' %}
   <div class="form-group">
     <label for="about">Description: </label>
@@ -7,7 +12,9 @@
     <p class="error-response"></p>
   </div>
   <div class="form-group">
-    <button type="submit" class="btn">Update</button>
-    <button type="button" class="btn" id="cancel-disease-edit">Cancel</button>
+    <button type="submit" class="btn" title="Submit the form">Update</button>
+    <button type="button" class="btn" id="cancel-disease-edit" title="Go back to diseases list">
+      Cancel
+    </button>
   </div>
 </form>

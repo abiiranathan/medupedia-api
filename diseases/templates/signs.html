@@ -1,11 +1,14 @@
 <div class="feature signs">
   <div class="card">
-    <h4>All Signs</h4>
+    <div class="card-header">
+      <h4 class="card-title">All signs</h4>
+      <button class="add-sign add-btn" title="Add new sign" type="button">+</button>
+    </div>
     <input
       type="search"
       name="filter_signs"
       class="form-input"
-      placeholder="Type to filter"
+      placeholder="Type to filter signs"
       id="filter_signs"
       autocomplete="off"
     />
@@ -14,10 +17,20 @@
   </div>
 
   <div class="arrows">
-    <button class="arrow right sign" title="Add selected medical signs" type="button">
+    <button
+      class="arrow right sign"
+      title="Add selected medical signs"
+      type="button"
+      title="Add to disease signs"
+    >
       <span>&#8594;</span>
     </button>
-    <button class="arrow left sign" title="Remove selected medical signs" type="button">
+    <button
+      class="arrow left sign"
+      title="Remove selected medical signs"
+      type="button"
+      title="Remove from disease signs"
+    >
       <span>&#8592;</span>
     </button>
   </div>

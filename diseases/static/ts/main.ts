@@ -3,14 +3,8 @@
 import { SignOrSymptom, Disease, NewDiseaseData } from "./types";
 import * as api from "./api";
 import * as dom from "./dom";
-import getDiseaseHTML from "./disease-template";
-export const TABS_OPEN = "tabs-open";
-export const DISEASE = "disease";
-
-export const STATES = {
-  OPEN: "yes",
-  NOT_OPEN: "no",
-};
+import "./modal";
+import { showSignModal, showSymptomModal } from "./modal";
 
 let signs: SignOrSymptom[], symptoms: SignOrSymptom[], diseases: Disease[];
 
@@ -48,6 +42,33 @@ dom.addDiseaseForm.addEventListener("submit", e => {
     .then(savedDisease => {
       dom.populateDiseases([savedDisease], false);
       dom.hideDiseaseDetail();
+
+      // Reset the form
+
+      dom.chosen_signs.innerHTML = "";
+      dom.chosen_symptoms.innerHTML = "";
+
+      const sympsNames = Array.from(dom.chosen_symptoms.options).map(option => option.value);
+      const symptomsSelected = symptoms.filter(s => sympsNames.includes(s.name));
+
+      const signNames = Array.from(dom.chosen_signs.options).map(option => option.value);
+      const signSelected = symptoms.filter(s => signNames.includes(s.name));
+
+      dom.selectItems(dom.available_symptoms, symptomsSelected);
+      dom.selectItems(dom.available_signs, signSelected);
+
+      dom.rmvSymptomBtn.click();
+      dom.rmvSignBtn.click();
+
+      // Clear the disease name
+      const name = document.querySelector("#add-disease-form #name") as HTMLInputElement;
+
+      if (name) {
+        name.value = "";
+        name.focus();
+        name.scrollIntoView({ behavior: "smooth" });
+      }
+
       alert(`${savedDisease.name} registered successfully!`);
     })
     .catch(err => {
@@ -101,19 +122,38 @@ dom.editForm.addEventListener("submit", async e => {
 
     try {
       const disease = await api.handleUpdateDisease(id, data);
-      diseases = diseases.map(d => (d.id === disease.id ? disease : d));
-      dom.populateDiseases(diseases, true);
-      dom.hideDiseaseDetail();
-      dom.editForm.style.display = "none";
-
-      alert(`${disease.name} updated successfully!`);
+      alert(`${disease.name} updated successfully! The page will refresh for changes!`);
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
   }
 });
 
-async function initializePage() {
+dom.regSymptomBtn.onclick = () => {
+  showSymptomModal();
+  dom.addModalFooterButtons("symptom", api.saveNewSymptom, (symptom: SignOrSymptom) =>
+    symptoms.push(symptom)
+  );
+};
+
+dom.regSignBtn.onclick = () => {
+  showSignModal();
+  dom.addModalFooterButtons("sign", api.saveNewSign, (sign: SignOrSymptom) => signs.push(sign));
+};
+
+const debounce = (func: Function, delay: number) => {
+  let timeoutId;
+
+  return (...args) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      func(...args);
+    }, delay);
+  };
+};
+
+document.addEventListener("DOMContentLoaded", async () => {
   for (let i = 0; i < dom.tabs.length; i++) {
     const element = dom.tabs[i] as HTMLButtonElement;
 
@@ -137,57 +177,26 @@ async function initializePage() {
     symptoms = symptomsList;
     signs = signsList;
     diseases = diseasesList;
-
-    dom.setUpSymptoms(symptoms);
-    dom.setUpSigns(signs);
-    dom.setUpDiseases(diseases);
+    dom.setDOMState(diseases, symptoms, signs);
   } catch (error) {
     dom.showErrorMessage();
   } finally {
     dom.hideSpinner();
   }
 
-  const activeDisease: Disease = JSON.parse(localStorage.getItem(DISEASE));
+  const container = document.querySelector(".container") as HTMLDivElement;
+  let resized = false;
 
-  if (activeDisease != null && localStorage.getItem(TABS_OPEN) === STATES.NOT_OPEN) {
-    const match = diseases.find(d => d.id === activeDisease?.id);
+  container.onscroll = e => {
+    if (resized) return false;
 
-    if (match) {
-      showDiseaseDetail(match);
-    } else {
-      localStorage.removeItem(DISEASE);
-      dom.hideDiseaseDetail();
-    }
-  } else {
-    dom.hideDiseaseDetail();
-  }
-}
-
-export function showDiseaseDetail(disease: Disease) {
-  dom.tabWidget.style.display = "none";
-  dom.editForm.style.display = "none";
-
-  const diseaseDetail = document.querySelector(".disease-detail") as HTMLDivElement;
-  diseaseDetail.innerHTML = "";
-
-  diseaseDetail.innerHTML = getDiseaseHTML(disease);
-  diseaseDetail.style.display = "block";
-
-  localStorage.setItem(TABS_OPEN, STATES.NOT_OPEN);
-  localStorage.setItem(DISEASE, JSON.stringify(disease));
-
-  const spanClose = document.querySelector("#disease__name > span") as HTMLSpanElement;
-  const backButton = document.getElementById("backButton") as HTMLButtonElement;
-  const editButton = document.getElementById("editButton") as HTMLButtonElement;
-
-  if (backButton && spanClose) {
-    backButton.onclick = () => dom.hideDiseaseDetail();
-    spanClose.onclick = () => dom.hideDiseaseDetail();
-  }
-
-  if (editButton) {
-    editButton.onclick = () => dom.editDisease(diseases, signs, symptoms);
-  }
-}
-
-document.addEventListener("DOMContentLoaded", initializePage);
+    debounce(() => {
+      const diff: number = (e.target as HTMLDivElement).scrollTop;
+      if (diff > 100) {
+        dom.header.style.padding = "0.25rem 1rem";
+        dom.header.style.overflow = "hidden";
+        resized = true;
+      }
+    }, 300);
+  };
+});

@@ -10,6 +10,38 @@
   text-align: center;
 }
 
+.btn {
+  color: #000;
+  background-color: inherit;
+  padding: 10px 1rem;
+  transition: all 0.2s ease;
+  overflow: hidden;
+  outline: none;
+  border: 1px solid #222;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 4px;
+  box-shadow: 0 0 2px 2px lightgray;
+}
+
+.btn:hover {
+  color: #fff;
+  background-color: #1a1835;
+}
+
+.btn[primary] {
+  background-color: #1a1835;
+  color: #fff;
+}
+
+.btn[primary]:hover {
+  opacity: 0.95;
+  box-shadow: 0 0 4px 4px lightgray;
+}
+
 html {
   min-height: 100vh;
   height: 100vh;
@@ -27,10 +59,18 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overscroll-behavior-y: none;
+}
+
+body.modal-open {
+  overflow: hidden !important;
 }
 
 main {
-  background-color: #245d5d;
   width: 100%;
   height: 100%;
   display: flex;
@@ -43,19 +83,27 @@ main {
   max-width: 800px;
   min-width: 90%;
   height: 100%;
-  overflow-y: auto;
-  margin: 2px 1rem 1rem;
-  padding: 1rem 2rem;
-  background-color: #fff;
+  overflow: auto;
+  margin: 0px 1rem 0.25rem;
+  padding: 0 2rem 1rem 2rem;
   border-radius: 4px;
   box-shadow: 0 0 4px 4px rgb(94, 97, 97);
+  background-color: #fff;
+  position: relative;
 }
 
 .header {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 2rem;
+  padding: 2rem 0;
+  position: sticky;
+  top: 0;
+  background-color: #fefefe;
+  width: 100%;
+  border-bottom: 4px solid #bbb;
+  z-index: 2;
+  transition: padding 0.3s linear;
 }
 
 #logo {
@@ -109,15 +157,41 @@ textarea {
   margin: 1rem 0;
 }
 
-#add-disease-form .card {
-  padding: 5px;
-  border-radius: 4px 4px 0 0;
-  margin-bottom: 12px;
+#add-disease-form .card,
+#edit-disease-form .card {
+  padding: 10px;
+  border-radius: 4px;
+  margin: 12px 0;
+  background-color: cornflowerblue;
+  color: #fff;
 }
 
-#add-disease-form .card h4 {
-  color: teal;
+.card .card-title {
+  color: #fff;
   font-size: 18px;
+  padding: 0.5rem;
+}
+
+.card .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.card .card-header .add-btn {
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  color: green;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.card .card-header button {
+  display: flex;
+  justify-content: space-between;
 }
 
 .feature {
@@ -134,23 +208,28 @@ textarea {
   margin: 0 1rem;
 }
 
+.disease-name {
+  margin: 1rem 0;
+  color: peru;
+}
+
 .arrows .arrow {
   display: inline-block;
   margin-bottom: 1rem;
-  color: #006;
+  color: #333;
   background-color: inherit;
   padding: 10px 1rem;
   transition: all 0.2s ease;
   overflow: hidden;
   outline: none;
-  border: 1px solid #006d70;
-  border-radius: 8px;
+  border: 1px solid #333;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
 }
+
 .arrows .arrow:hover {
   background-color: #006d70;
   color: aliceblue;
@@ -162,16 +241,12 @@ textarea {
   font-weight: bold;
 }
 
-.arrows .arrow span:hover {
-  transform: scale(2.5);
-}
-
 .select-list {
   width: 100%;
   height: 200px;
   min-width: 250px;
-  background-color: #ecf1f1;
-  padding: 8px 4px;
+  background-color: #f1f1f1;
+  padding: 8px;
   overflow-y: auto;
   overflow-x: hidden;
   outline: none;
@@ -206,7 +281,7 @@ textarea {
 @media (max-width: 680px) {
   .container {
     margin: 0;
-    padding: 1rem;
+    padding: 0 1rem 1rem;
   }
 
   .select-list {
@@ -226,6 +301,10 @@ textarea {
   }
 }
 
+.helper {
+  padding: 8px;
+}
+
 @media (max-width: 600px) {
   #search {
     width: 90%;
@@ -238,6 +317,10 @@ textarea {
 
   .feature .card {
     width: 100%;
+  }
+
+  .select-list {
+    height: auto;
   }
 
   .arrows {
@@ -288,24 +371,6 @@ textarea {
   display: block;
 }
 
-.disease-detail {
-  display: none;
-}
-
-.btn {
-  outline: none;
-  border: 1px solid grey;
-  padding: 0.5rem 1.25rem;
-  box-shadow: 0 0 2px 2px lightgray;
-  cursor: pointer;
-  border-radius: 16px;
-}
-
-.btn:hover {
-  background-color: peru;
-  color: #ecf1f1;
-}
-
 #disease__symptoms,
 #disease__signs {
   list-style-position: initial;
@@ -313,18 +378,19 @@ textarea {
 }
 
 .disease-detail .section {
-  margin: 1rem 0 0.5rem 0;
+  margin: 0.5rem 0;
+  color: #1a1835;
 }
 
-#backButton {
-  font-size: 1rem;
-  margin-top: 1rem;
+.disease-detail li > span {
+  line-height: 1.8;
+  color: #000;
 }
 
-#backButton span {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.disease-detail li > span:last-child {
+  line-height: 1.5;
+  font-size: 0.9rem;
+  color: #333;
 }
 
 /* Edit disease form */

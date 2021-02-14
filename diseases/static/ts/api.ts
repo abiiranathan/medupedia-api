@@ -1,4 +1,12 @@
-import { Features, Disease, Diseases, NewDiseaseData, UpdatedDisease } from "./types";
+import Feature from "./feature";
+import {
+  Features,
+  Disease,
+  Diseases,
+  NewDiseaseData,
+  UpdatedDisease,
+  SignOrSymptom,
+} from "./types";
 
 async function fetchData<T>(url: string): Promise<Array<T>> {
   const response = await fetch(url);
@@ -12,17 +20,17 @@ async function fetchData<T>(url: string): Promise<Array<T>> {
 }
 
 export const fetchSymptoms = async (): Promise<Features> => {
-  const url = "/api/symptoms/?query={id, name, description}";
+  const url = "/api/symptoms/?query={id,name,description}";
   return await fetchData(url);
 };
 
 export const fetchSigns = async (): Promise<Features> => {
-  const url = "/api/signs/?query={id, name, description}";
+  const url = "/api/signs/?query={id,name,description}";
   return await fetchData(url);
 };
 
 export const fetchDiseases = async (): Promise<Diseases> => {
-  const url = "/api/diseases/?query={id, name, signs, symptoms, about}";
+  const url = "/api/diseases/?query={id,name,signs,symptoms,about}";
   return await fetchData(url);
 };
 
@@ -67,3 +75,41 @@ export async function handleUpdateDisease(id: string, data: UpdatedDisease): Pro
     throw new Error(res.statusText);
   }
 }
+
+export const saveNewSymptom = async (name: string, description: string): Promise<SignOrSymptom> => {
+  const config = {
+    method: "POST",
+    body: JSON.stringify({ name, description }),
+    headers: {
+      "content-type": "application/json",
+    },
+  };
+
+  const res = await fetch(`/api/symptoms/`, config);
+  const symptom = await res.json();
+
+  if (res.ok) {
+    return symptom;
+  } else {
+    throw new Error(res.statusText);
+  }
+};
+
+export const saveNewSign = async (name: string, description: string): Promise<SignOrSymptom> => {
+  const config = {
+    method: "POST",
+    body: JSON.stringify({ name, description }),
+    headers: {
+      "content-type": "application/json",
+    },
+  };
+
+  const res = await fetch(`/api/signs/`, config);
+  const sign = await res.json();
+
+  if (res.ok) {
+    return sign;
+  } else {
+    throw new Error(res.statusText);
+  }
+};

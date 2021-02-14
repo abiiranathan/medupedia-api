@@ -1,0 +1,130 @@
+/* Modal styles */
+.overlay {
+  width: 100vw;
+  height: 100vh;
+}
+
+.overlay.modal-open {
+  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: none !important;
+}
+
+.modal {
+  z-index: 999;
+  border-radius: 8px;
+  height: auto;
+  min-height: 350px;
+  width: 80%;
+  margin: auto;
+  position: fixed;
+  overflow: hidden;
+  top: 20px;
+  bottom: 50px;
+  background: #f1f1f1;
+  box-shadow: 0 0 6px 6px rgba(0, 0, 0, 0.2);
+  animation-name: zoomIn;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+  animation-duration: 0.5s;
+  display: none;
+  opacity: 1 !important;
+}
+
+.modal.open {
+  display: block;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.5);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.modal .modal-header {
+  width: 100%;
+  background: #f1f1f1;
+  padding: 0.5rem;
+  color: #222;
+  font-weight: bold;
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal .modal-header .close {
+  transform: scale(1.8);
+  cursor: pointer;
+  font-weight: bold;
+  color: rgb(204, 11, 11);
+  transition: all 0.2s ease;
+  padding: 5px 12px;
+}
+
+.modal .modal-header .close:hover {
+  transform: scale(2.5);
+}
+
+.modal .modal-body {
+  background-color: #fefefe;
+  position: relative;
+  padding: 0.5rem 1rem;
+  overflow: auto;
+  max-height: 450px;
+  height: 100%;
+}
+.modal .modal-content {
+  padding-bottom: 50px;
+}
+.modal .modal-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -5px;
+  background: #f1f1f1;
+}
+
+.modal .modal-footer > .action-buttons button {
+  margin-right: 10px;
+}
+
+.modal .modal-footer .modal-close {
+  background-color: tomato;
+  color: #fff;
+  border: #222;
+}
+
+@media (max-width: 600px) {
+  .modal {
+    width: 95%;
+  }
+}
+
+/* Modal forms */
+.modal .feature-form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.modal fieldset {
+  padding: 1rem 10px;
+  width: 100%;
+}
+
+.modal .feature-form .form-group {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+}
